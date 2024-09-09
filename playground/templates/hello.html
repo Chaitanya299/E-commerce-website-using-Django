@@ -2,8 +2,15 @@
     <body>
         {% if name %} 
         <h1>Hello {{ name }}</h1>
-        {%else %}
-        <h1>Hello World</h1>
-        {%endif%}
+        {% else %}
+        <h1>Hello chaitu</h1>
+        {% endif %}
+
+        <ul>
+            {% for product in products %}
+            <li>{{ product.title }}</li>
+            {% endfor %}
+        </ul>
+        
     </body>
 </html>
