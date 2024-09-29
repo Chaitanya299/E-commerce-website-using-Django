@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.db.models import Value, F, Func, Q
-from django.db.models.aggregates import Count,Max,Min,Avg,Sum
-from django.core.exceptions import ObjectDoesNotExist
-from store.models import Product, orderItem
+from django.db import transaction
+from store.models import Collection, Product, orderItem, Order, customer
 
 # Create your views(action) here.
 # request handler 
@@ -12,8 +10,6 @@ from store.models import Product, orderItem
 
 def say_hello(request):
     
-    queryset=Product.objects.order_by('-title')
-   
-    return render(request,'hello.html',{'name':'chaitu','products':list(queryset)})
-
-  
+    queryset=Product.objects.raw('select * from store_product')
+        
+    return render(request,'hello.html',{'name':'chaitu','result': list(queryset)})
